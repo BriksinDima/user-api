@@ -1,0 +1,17 @@
+server:
+  port: 8088
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      retries: 3
+      acks: all
+      properties:
+        batch.size: 16384
+        linger.ms: 1
+
+kafka:
+  topic:
+    userCash: user-cash

@@ -1,6 +1,7 @@
 package me.bdv.user.api.controller;
 
 import me.bdv.user.api.dto.UserDto;
+import me.bdv.user.api.producer.UserProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserProducer userProducer;
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) {
-        UserDto createdUser = userService.createUser(user);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    public ResponseEntity<Void> createUser(@RequestBody UserDto user) {
+        userProducer.createCashUser(user);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
